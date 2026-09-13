@@ -41,5 +41,7 @@ jobs:
 
 
       - name: Run pytest
+        env:
+          PYTHONPATH: .
         run: |
           pytest
