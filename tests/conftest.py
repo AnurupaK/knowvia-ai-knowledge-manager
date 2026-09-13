@@ -1,3 +1,9 @@
+import os
+
+os.environ["AWS_REGION"] = "test-region"
+os.environ["AWS_ACCESS_KEY_ID"] = "test-access-key"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "test-secret-key"
+
 import pytest
 
 from backend.app import app
