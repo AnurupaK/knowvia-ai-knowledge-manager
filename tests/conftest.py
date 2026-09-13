@@ -1,8 +1,34 @@
 import os
 
+# Dummy environment variables for CI tests.
+# These are NOT real AWS credentials.
 os.environ["AWS_REGION"] = "test-region"
-os.environ["AWS_ACCESS_KEY_ID"] = "test-access-key"
-os.environ["AWS_SECRET_ACCESS_KEY"] = "test-secret-key"
+os.environ["S3_BUCKET_NAME"] = "test-bucket"
+
+os.environ[
+    "KNOWLEDGE_CURRENT_VERSION_PATH"
+] = "test/knowledge_base/current_version/"
+
+os.environ[
+    "FAQ_CURRENT_VERSION_PATH"
+] = "test/faq/current_version/"
+
+os.environ[
+    "BACKUP_PATH"
+] = "test/knowledge_base/backup/"
+
+os.environ[
+    "METADATA_PATH"
+] = "test/knowledge_base/metadata/"
+
+os.environ[
+    "VECTOR_STORE"
+] = "test/vector_store/"
+
+os.environ[
+    "FLASK_SECRET_KEY"
+] = "test-secret-key"
+
 
 import pytest
 
