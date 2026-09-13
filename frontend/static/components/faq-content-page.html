@@ -1,0 +1,310 @@
+<!-- ========================================
+     FAQ Content Page
+     ======================================== -->
+
+<div class="faq-content-page">
+
+    <!-- ========================================
+         Header
+         ======================================== -->
+
+    <div class="faq-page-header">
+
+        <div class="faq-page-title-section">
+
+            <h1>FAQ Management</h1>
+
+            <p>
+                Create and manage frequently asked questions
+                for this category.
+            </p>
+
+        </div>
+
+
+        <div class="faq-category-info">
+
+            <div class="faq-category-name">
+                Alternative School
+            </div>
+
+            <div class="faq-category-id">
+                Category ID:
+                <span>ryukyuAI_001</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         Action Buttons
+         ======================================== -->
+
+    <div class="faq-top-actions">
+
+        <button
+            id="faq-back-btn"
+            class="faq-action-btn faq-back-btn"
+            type="button"
+        >
+            ← Back
+        </button>
+
+
+        <div class="faq-main-actions">
+
+            <button
+                id="faq-save-btn"
+                class="faq-action-btn faq-save-btn"
+                type="button"
+            >
+                Save
+            </button>
+
+
+            <button
+                id="faq-fetch-btn"
+                class="faq-action-btn faq-fetch-btn"
+                type="button"
+            >
+                Fetch from S3
+            </button>
+
+
+            <button
+                id="faq-send-btn"
+                class="faq-action-btn faq-send-btn"
+                type="button"
+            >
+                Send to S3
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         Status Message
+         ======================================== -->
+
+    <div
+        id="faq-status-message"
+        class="faq-status-message hidden"
+    >
+    </div>
+
+
+    <!-- ========================================
+         Generate FAQ Section
+         ======================================== -->
+
+    <section class="faq-generate-section">
+
+        <div class="faq-section-header">
+
+            <div>
+
+                <h2>Generate FAQs</h2>
+
+                <p>
+                    Generate frequently asked questions
+                    based on the category information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             FAQ Count
+             ======================================== -->
+
+        <div class="faq-count-control">
+
+            <label
+                for="faq-count-input"
+                class="faq-count-label"
+            >
+                How many FAQs?
+            </label>
+
+
+            <div class="faq-count-input-row">
+
+                <input
+                    id="faq-count-input"
+                    class="faq-count-input"
+                    type="number"
+                    min="1"
+                    max="20"
+                    value="10"
+                >
+
+            </div>
+
+
+            <!-- ========================================
+                 FAQ Count Note
+                 ======================================== -->
+
+            <div class="faq-count-note">
+
+                <span class="faq-note-icon">
+                    📝
+                </span>
+
+                <div class="faq-note-content">
+
+                    <strong>Note</strong>
+
+                    <span>
+                        Recommended: 10 FAQs · Maximum: 20
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             Generate Button
+             ======================================== -->
+
+        <button
+            id="generate-faq-btn"
+            class="faq-generate-btn"
+            type="button"
+        >
+
+            <span class="faq-generate-icon">
+                ✦
+            </span>
+
+            Generate FAQs with Claude
+
+        </button>
+
+
+        <!-- ========================================
+             Generation Loading
+             ======================================== -->
+
+        <div
+            id="faq-generation-loader"
+            class="faq-generation-loader hidden"
+        >
+
+            <div class="faq-spinner"></div>
+
+            <span>
+                Claude is generating FAQs...
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         FAQ Editor Section
+         ======================================== -->
+
+    <section class="faq-editor-section">
+
+        <div class="faq-section-header">
+
+            <div>
+
+                <h2>FAQs</h2>
+
+                <p>
+                    Edit generated questions and answers,
+                    or add your own FAQs.
+                </p>
+
+            </div>
+
+
+            <button
+                id="add-faq-btn"
+                class="faq-add-btn"
+                type="button"
+            >
+                + Add FAQ
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             FAQ List
+             ======================================== -->
+
+        <div
+            id="faq-list"
+            class="faq-list"
+        >
+
+            <!--
+                FAQ cards will be generated
+                by faq-content-page.js.
+            -->
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         JSON Preview
+         ======================================== -->
+
+    <section class="faq-preview-section">
+
+        <div class="faq-section-header">
+
+            <div>
+
+                <h2>JSON Preview</h2>
+
+                <p>
+                    Click Preview to generate the latest
+                    FAQ JSON.
+                </p>
+
+            </div>
+
+
+            <button
+                id="faq-preview-btn"
+                class="faq-action-btn faq-preview-btn"
+                type="button"
+            >
+                Preview
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             JSON Preview Container
+             ======================================== -->
+
+        <div class="faq-preview-container">
+
+            <pre
+                id="faq-json-preview"
+                class="faq-json-preview"
+            ></pre>
+
+        </div>
+
+    </section>
+
+</div>

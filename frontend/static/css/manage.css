@@ -1,0 +1,114 @@
+/* ========================================
+   Manage Page
+   ======================================== */
+
+.manage-page {
+    padding: 40px;
+}
+
+
+/* ========================================
+   Header
+   ======================================== */
+
+.manage-header {
+    margin-bottom: 40px;
+}
+
+
+.manage-header h1 {
+    margin: 20px 0 8px;
+}
+
+
+.manage-header p {
+    margin: 0;
+    color: #666;
+}
+
+
+/* ========================================
+   Options
+   ======================================== */
+
+.manage-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+}
+
+
+/* ========================================
+   Option Card
+   ======================================== */
+
+.manage-option-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding: 28px;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    background: #fff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.manage-option-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ========================================
+   Icon
+   ======================================== */
+
+.manage-option-icon {
+    font-size: 36px;
+    line-height: 1;
+}
+
+
+/* ========================================
+   Content
+   ======================================== */
+
+.manage-option-content h2 {
+    margin: 0 0 8px;
+}
+
+
+.manage-option-content p {
+    margin: 0;
+
+    color: #666;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .manage-options {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,741 @@
+/* ========================================
+   Knowledge Base
+   ======================================== */
+
+.knowledge-base-page {
+
+    padding: 30px;
+
+}
+
+
+/* ========================================
+   Header
+   ======================================== */
+
+.knowledge-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.knowledge-header h1 {
+
+    margin: 0 0 6px;
+
+    font-size: 28px;
+
+    color: #1e293b;
+
+}
+
+
+.knowledge-header p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   Add Category Button
+   ======================================== */
+
+.add-category-btn {
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
+
+
+.add-category-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* ========================================
+   Disabled Add Category Button
+   ======================================== */
+
+.add-category-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+
+.add-category-btn:disabled:hover {
+
+    background: #2563eb;
+
+}
+
+
+/* ========================================
+   Cards Container
+   ======================================== */
+
+.knowledge-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(250px, 1fr));
+
+    gap: 22px;
+
+}
+
+
+/* ========================================
+   Loading Animation
+   ======================================== */
+
+.page-loader {
+
+    min-height: 250px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    grid-column: 1 / -1;
+
+}
+
+
+/* ========================================
+   Loading Spinner
+   ======================================== */
+
+.loader-spinner {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: 4px solid #e2e8f0;
+
+    border-top-color: #2563eb;
+
+    border-radius: 50%;
+
+    animation:
+        loader-spin 0.8s linear infinite;
+
+}
+
+
+/* ========================================
+   Loading Text
+   ======================================== */
+
+.page-loader p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   Spinner Animation
+   ======================================== */
+
+@keyframes loader-spin {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+/* ========================================
+   Knowledge Card
+   ======================================== */
+
+.knowledge-card {
+
+    min-height: 250px;
+
+    padding: 24px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 4px 12px
+        rgba(15, 23, 42, 0.05);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.knowledge-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(15, 23, 42, 0.10);
+
+}
+
+
+/* ========================================
+   Icon
+   ======================================== */
+
+.knowledge-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+}
+
+
+/* ========================================
+   Content
+   ======================================== */
+
+.knowledge-content {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.knowledge-content h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 21px;
+
+    color: #1e293b;
+
+}
+
+
+.knowledge-content p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    flex: 1;
+
+}
+
+
+/* ========================================
+   Actions
+   ======================================== */
+
+.knowledge-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+}
+
+
+.knowledge-actions button {
+
+    border: none;
+
+    padding: 8px 14px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+/* ========================================
+   Manage
+   ======================================== */
+
+.go-category-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.go-category-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* ========================================
+   Edit
+   ======================================== */
+
+.edit-category-btn {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+}
+
+
+.edit-category-btn:hover {
+
+    background: #dbeafe;
+
+}
+
+
+/* ========================================
+   Delete
+   ======================================== */
+
+.delete-category-btn {
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+}
+
+
+.delete-category-btn:hover {
+
+    background: #fee2e2;
+
+}
+
+
+/* ========================================
+   Add Category Card
+   ======================================== */
+
+.add-category-card {
+
+    min-height: 250px;
+
+    border-radius: 14px;
+
+    border: 2px dashed #cbd5e1;
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+}
+
+
+.add-category-card:hover {
+
+    border-color: #2563eb;
+
+    color: #2563eb;
+
+    background: #f8fbff;
+
+}
+
+
+.add-category-plus {
+
+    font-size: 36px;
+
+    font-weight: 300;
+
+}
+
+
+/* ========================================
+   Disabled Add Category Card
+   ======================================== */
+
+.add-category-card:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+}
+
+
+.add-category-card:disabled:hover {
+
+    border-color: #cbd5e1;
+
+    color: #64748b;
+
+    background: #f8fafc;
+
+}
+
+
+/* ========================================
+   Editing
+   ======================================== */
+
+.edit-category-title {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 10px 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+
+    outline: none;
+
+}
+
+
+.edit-category-description {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    min-height: 80px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    resize: vertical;
+
+    outline: none;
+
+}
+
+
+.edit-category-title:focus,
+
+.edit-category-description:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+/* ========================================
+   Emoji Editor
+   ======================================== */
+
+.emoji-editor {
+
+    position: relative;
+
+    display: inline-block;
+
+}
+
+
+/* ========================================
+   Current Emoji Button
+   ======================================== */
+
+.emoji-current-btn {
+
+    width: 58px;
+
+    height: 58px;
+
+    padding: 0;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.emoji-current-btn:hover {
+
+    border-color: #2563eb;
+
+    background: #f8fbff;
+
+}
+
+
+/* ========================================
+   Emoji Picker
+   ======================================== */
+
+.emoji-picker {
+
+    display: none;
+
+    position: absolute;
+
+    top: 68px;
+
+    left: 0;
+
+    width: 230px;
+
+    padding: 10px;
+
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, 0.15);
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 5px;
+
+    z-index: 1000;
+
+}
+
+
+/* ========================================
+   Show Emoji Picker
+   ======================================== */
+
+.emoji-picker.show {
+
+    display: grid;
+
+}
+
+
+/* ========================================
+   Emoji Buttons
+   ======================================== */
+
+.emoji-picker button {
+
+    width: 32px;
+
+    height: 32px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.emoji-picker button:hover {
+
+    background: #eff6ff;
+
+    transform: scale(1.12);
+
+}
+
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 1000px) {
+
+    .knowledge-cards {
+
+        grid-template-columns:
+            repeat(2, minmax(250px, 1fr));
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .knowledge-base-page {
+
+        padding: 20px;
+
+    }
+
+
+    .knowledge-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+    .knowledge-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .emoji-picker {
+
+        width: 220px;
+
+    }
+
+}

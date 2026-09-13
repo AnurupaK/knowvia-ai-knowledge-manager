@@ -1,0 +1,116 @@
+# ========================================
+# Python
+# ========================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+management_venv/
+
+# ========================================
+# Environment / Secrets
+# ========================================
+
+.env
+.env.*
+!.env.example
+
+# AWS credentials
+.aws/
+*.pem
+
+# ========================================
+# IDE / Editor
+# ========================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ========================================
+# OS files
+# ========================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================================
+# Logs
+# ========================================
+
+*.log
+logs/
+
+# ========================================
+# Testing / Coverage
+# ========================================
+
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+.tox/
+.nox/
+
+# ========================================
+# Build / Distribution
+# ========================================
+
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ========================================
+# Local development files
+# ========================================
+
+*.local
+local/
+tmp/
+temp/
+
+# ========================================
+# Flask
+# ========================================
+
+instance/
+.webassets-cache/
+
+# ========================================
+# Node (if added later)
+# ========================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================================
+# Project-specific
+# ========================================
+
+# Local data / test files
+data/
+
+# Generated files
+uploads/
+downloads/
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
+# unnecessary files
+page
+testing files

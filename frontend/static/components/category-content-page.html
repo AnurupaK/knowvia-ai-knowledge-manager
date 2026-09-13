@@ -1,0 +1,368 @@
+<section class="category-content-page">
+
+    <!-- ========================================
+         Header
+         ======================================== -->
+
+    <div class="category-content-header">
+
+        <div class="category-header-left">
+
+            <button class="action-btn" id="back-to-manage">
+                ← Back
+            </button>
+
+            <div class="category-title-area">
+
+                <h1 id="category-content-title">
+                    Category
+                </h1>
+
+                <p id="category-content-subtitle">
+                    Manage category information.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="category-header-actions">
+
+            <button class="action-btn" id="fetch-from-s3-btn">
+                Fetch from S3
+            </button>
+
+            <button class="action-btn" id="send-to-s3-btn">
+                Send to S3
+            </button>
+
+            <button class="action-btn primary-btn" id="save-category-content-btn">
+                Save
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         Category Status Message
+         ======================================== -->
+
+    <div id="category-content-status" class="category-content-status" hidden></div>
+
+
+    <!-- ========================================
+         Editor + Preview
+         ======================================== -->
+
+    <div class="category-editor-layout">
+
+
+        <!-- ====================================
+             LEFT: EDITOR
+             ==================================== -->
+
+        <div class="category-editor-panel">
+
+
+            <!-- ====================================
+     Basic Information
+     ==================================== -->
+
+            <section class="category-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Basic Information
+                    </h2>
+
+                    <p>
+                        Define the main information for this category.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- ====================================
+             Category ID
+             ==================================== -->
+
+                    <div class="form-group category-id-group">
+
+                        <label for="category-id">
+                            Category ID
+                        </label>
+
+                        <input type="text" id="category-id" placeholder="ryukyuAI_001">
+
+                        <span class="field-help" id="category-id-help">
+                            Enter the Category ID and click Check before editing other information.
+                        </span>
+
+                    </div>
+
+
+                    <!-- ====================================
+             Category Name English
+             ==================================== -->
+
+                    <div class="form-group">
+
+                        <label for="category-en">
+                            Category Name (English)
+                        </label>
+
+                        <input type="text" id="category-en" placeholder="Alternative School">
+
+                    </div>
+
+
+                    <!-- ====================================
+             Category Name Japanese
+             ==================================== -->
+
+                    <div class="form-group category-jp-group">
+
+                        <label for="category-jp">
+                            Category Name (Japanese)
+                        </label>
+
+                        <input type="text" id="category-jp" placeholder="オルタナティブスクール">
+
+                        <div class="category-check-actions">
+
+                            <button type="button" class="small-action-btn" id="check-category-btn">
+                                Check
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ====================================
+         Category Check Status
+         ==================================== -->
+
+                <div id="category-check-status" class="category-check-status" hidden></div>
+
+            </section>
+
+
+            <!-- ====================================
+                 Keywords
+                 ==================================== -->
+
+            <section class="category-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Keywords
+                    </h2>
+
+                    <p>
+                        Enter one keyword per line.
+                    </p>
+
+                </div>
+
+                <div class="keywords-grid">
+
+                    <div class="form-group">
+
+                        <label for="keywords-en">
+                            Keywords (English)
+                        </label>
+
+                        <textarea id="keywords-en" rows="5"
+                            placeholder="alternative school&#10;education&#10;kids&#10;learning"></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="keywords-jp">
+                            Keywords (Japanese)
+                        </label>
+
+                        <textarea id="keywords-jp" rows="5" placeholder="オルタナティブスクール&#10;教育&#10;子ども&#10;学び"></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ====================================
+                 Description
+                 ==================================== -->
+
+            <section class="category-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Description
+                    </h2>
+
+                    <p>
+                        Describe the category in English and Japanese.
+                    </p>
+
+                </div>
+
+                <div class="description-grid">
+
+                    <div class="form-group">
+
+                        <label for="description-en">
+                            Description (English)
+                        </label>
+
+                        <textarea id="description-en" rows="6" placeholder="Describe this category..."></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="description-jp">
+                            Description (Japanese)
+                        </label>
+
+                        <textarea id="description-jp" rows="6" placeholder="このカテゴリーについて説明してください..."></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ====================================
+                 Key Information
+                 ==================================== -->
+
+            <section class="category-section">
+
+                <div class="section-heading section-heading-row">
+
+                    <div>
+
+                        <h2>
+                            Key Information
+                        </h2>
+
+                        <p>
+                            Add important information fields.
+                        </p>
+
+                    </div>
+
+                    <button type="button" class="small-action-btn" id="add-key-information-btn">
+                        + Add Field
+                    </button>
+
+                </div>
+
+                <div class="key-information-list" id="key-information-list"></div>
+
+            </section>
+
+
+            <!-- ====================================
+                 Media
+                 ==================================== -->
+
+            <section class="category-section">
+
+                <div class="section-heading section-heading-row">
+
+                    <div>
+
+                        <h2>
+                            Media
+                        </h2>
+
+                        <p>
+                             Add images, PDFs, documents, spreadsheets, notes, and other files.
+                        </p>
+
+                    </div>
+
+                    <button type="button" class="small-action-btn" id="add-media-btn">
+                        + Add Media
+                    </button>
+
+                </div>
+
+                <div class="media-list" id="media-list"></div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- ====================================
+             RIGHT: PREVIEW
+             ==================================== -->
+
+        <aside class="category-preview-panel">
+
+            <div class="preview-header">
+
+                <div>
+
+                    <span class="preview-label">
+                        PREVIEW
+                    </span>
+
+                    <h2>
+                        Category Preview
+                    </h2>
+
+                </div>
+
+                <button type="button" class="action-btn" id="preview-btn">
+                    Preview
+                </button>
+
+            </div>
+
+
+            <div class="category-preview" id="category-preview">
+
+                <div class="empty-preview">
+
+                    <div class="empty-preview-icon">
+                        👁
+                    </div>
+
+                    <h3>
+                        No Preview Yet
+                    </h3>
+
+                    <p>
+                        Enter category information and click Preview.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+    </div>
+
+</section>

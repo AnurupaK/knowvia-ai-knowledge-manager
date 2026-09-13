@@ -1,0 +1,211 @@
+<div class="metadata-page">
+
+    <div class="metadata-header">
+
+        <div>
+            <h1>Metadata Management</h1>
+
+            <p>
+                Manage category IDs and category metadata.
+            </p>
+        </div>
+
+
+        <div class="metadata-actions">
+
+            <button
+                type="button"
+                id="fetch-from-s3-btn"
+                class="metadata-btn metadata-btn-secondary"
+            >
+                Fetch from S3
+            </button>
+
+
+            <button
+                type="button"
+                id="save-to-s3-btn"
+                class="metadata-btn metadata-btn-primary"
+            >
+                Save to S3
+            </button>
+
+
+            <button
+                type="button"
+                id="save-btn"
+                class="metadata-btn metadata-btn-success"
+            >
+                Save
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="metadata-status"
+        class="metadata-status"
+        hidden
+    ></div>
+
+
+    <!-- ========================================
+         Category ID Settings
+         ======================================== -->
+
+    <section class="metadata-section">
+
+        <div class="metadata-section-header">
+
+            <div>
+
+                <h2>
+                    Category ID Settings
+                </h2>
+
+                <p>
+                    The next ID will be generated from this counter.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="metadata-counter-card">
+
+            <div class="metadata-field">
+
+                <label for="next-id">
+                    Next ID
+                </label>
+
+
+                <input
+                    type="number"
+                    id="next-id"
+                    min="0"
+                    step="1"
+                    value="1"
+                    required
+                >
+
+
+                <span class="metadata-field-help">
+                    The next category will use this number.
+                    For example, <strong>4 → knowviaAI_004</strong>.
+                </span>
+
+            </div>
+
+
+            <div class="metadata-id-note">
+
+                <div class="metadata-id-note-title">
+                    Note
+                </div>
+
+
+                <div class="metadata-id-note-text">
+                    Please set the Next ID carefully.
+                    This field cannot be left blank.
+                    Category IDs will be generated sequentially
+                    starting from this number.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         Category Registry
+         ======================================== -->
+
+    <section class="metadata-section">
+
+        <div class="metadata-section-header">
+
+            <div>
+
+                <h2>
+                    Category Registry
+                </h2>
+
+                <p>
+                    Manage the categories registered in the knowledge base.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="add-category-btn"
+                class="metadata-btn metadata-btn-add"
+            >
+                + Add Category
+            </button>
+
+        </div>
+
+
+        <div class="metadata-table-wrapper">
+
+            <table class="metadata-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Category ID
+                        </th>
+
+                        <th>
+                            Category EN
+                        </th>
+
+                        <th>
+                            Category JP
+                        </th>
+
+                        <th class="metadata-actions-column">
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="category-table-body">
+                </tbody>
+
+            </table>
+
+
+            <div
+                id="empty-category-state"
+                class="metadata-empty-state"
+            >
+
+                <h3>
+                    No categories registered
+                </h3>
+
+                <p>
+                    Add a category or fetch the current metadata from S3.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

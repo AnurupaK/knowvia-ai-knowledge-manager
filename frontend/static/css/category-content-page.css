@@ -1,0 +1,2237 @@
+/* =========================================================
+   CATEGORY CONTENT PAGE
+
+   Professional SaaS / Management Dashboard Design
+
+   ========================================================= */
+
+:root {
+
+    --page-bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface-soft: #f8f9fc;
+
+    --text-primary: #172033;
+    --text-secondary: #667085;
+    --text-muted: #98a2b3;
+
+    --border: #e6e9ef;
+    --border-strong: #d9dee8;
+
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-soft: #eef2ff;
+
+    --success: #12b76a;
+    --danger: #ef4444;
+    --danger-soft: #fef2f2;
+
+    --shadow-sm:
+        0 1px 2px rgba(16, 24, 40, 0.04);
+
+    --shadow-md:
+        0 4px 12px rgba(16, 24, 40, 0.06);
+
+    --shadow-lg:
+        0 12px 30px rgba(16, 24, 40, 0.08);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.category-content-page {
+
+    width: 100%;
+    max-width: 1680px;
+
+    margin: 0 auto;
+
+    padding: 30px 34px 50px;
+
+    box-sizing: border-box;
+
+    color: var(--text-primary);
+}
+
+
+/* =========================================================
+   TOP HEADER
+   ========================================================= */
+
+.category-content-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 24px;
+
+    margin-bottom: 26px;
+}
+
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.category-header-left {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.category-title-area {
+
+    min-width: 0;
+}
+
+.category-title-area h1 {
+
+    margin: 0 0 5px;
+
+    color: var(--text-primary);
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    line-height: 1.25;
+}
+
+.category-title-area p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY CONTENT STATUS MESSAGE
+   ========================================================= */
+
+.category-content-status {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+
+    padding: 8px 8px 8px 14px;
+
+    border: 1px solid transparent;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   STATUS MESSAGE TEXT
+   ========================================================= */
+
+.category-content-status-message {
+
+    flex: 1;
+
+    min-width: 0;
+
+    word-break: break-word;
+
+    padding: 2px 0;
+}
+
+
+/* =========================================================
+   STATUS CLOSE BUTTON
+   ========================================================= */
+
+.category-content-status-close {
+
+    flex: 0 0 24px;
+
+    width: 24px;
+
+    height: 24px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    line-height: 24px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    opacity: 0.55;
+
+    transition:
+        background 0.15s ease,
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+.category-content-status-close:hover {
+
+    opacity: 1;
+
+    background: rgba(0, 0, 0, 0.07);
+
+    transform: scale(1.05);
+}
+
+.category-content-status-close:active {
+
+    transform: scale(0.95);
+}
+
+.category-content-status-close:focus {
+
+    outline: none;
+}
+
+.category-content-status-close:focus-visible {
+
+    outline: 2px solid currentColor;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   SUCCESS STATUS
+   ========================================================= */
+
+.category-content-status.success {
+
+    background: #ecfdf3;
+
+    border-color: #abefc6;
+
+    color: #067647;
+}
+
+
+/* =========================================================
+   ERROR STATUS
+   ========================================================= */
+
+.category-content-status.error {
+
+    background: #fef3f2;
+
+    border-color: #fecdca;
+
+    color: #b42318;
+}
+
+
+/* =========================================================
+   WARNING STATUS
+   ========================================================= */
+
+.category-content-status.warning {
+
+    background: #fffaeb;
+
+    border-color: #fedf89;
+
+    color: #b54708;
+}
+
+
+/* =========================================================
+   INFO STATUS
+   ========================================================= */
+
+.category-content-status.info {
+
+    background: #eff8ff;
+
+    border-color: #b2ddff;
+
+    color: #175cd3;
+}
+
+
+/* =========================================================
+   HEADER ACTIONS
+   ========================================================= */
+
+.category-header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   GENERAL BUTTON
+   ========================================================= */
+
+.action-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border-strong);
+
+    border-radius: 8px;
+
+    background: var(--surface);
+
+    color: #344054;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+.action-btn:hover {
+
+    background: #fafbfc;
+
+    border-color: #c8ced9;
+
+    box-shadow: var(--shadow-md);
+
+    transform: translateY(-1px);
+}
+
+.action-btn:active {
+
+    transform: translateY(0);
+}
+
+.action-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+#back-to-manage {
+
+    background: transparent;
+
+    border-color: transparent;
+
+    box-shadow: none;
+
+    color: var(--text-secondary);
+
+    padding-left: 8px;
+
+    padding-right: 8px;
+}
+
+#back-to-manage:hover {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    color: var(--text-primary);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.primary-btn {
+
+    background: var(--accent);
+
+    border-color: var(--accent);
+
+    color: #fff;
+
+    box-shadow:
+        0 2px 5px rgba(79, 70, 229, 0.22);
+}
+
+.primary-btn:hover {
+
+    background: var(--accent-hover);
+
+    border-color: var(--accent-hover);
+
+    color: #fff;
+
+    box-shadow:
+        0 5px 12px rgba(79, 70, 229, 0.25);
+}
+
+
+/* =========================================================
+   MAIN EDITOR LAYOUT
+   ========================================================= */
+
+.category-editor-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.08fr)
+        minmax(0, 0.92fr);
+
+    gap: 22px;
+
+    width: 100%;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   EDITOR
+   ========================================================= */
+
+.category-editor-panel {
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SECTION CARDS
+   ========================================================= */
+
+.category-section {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 16px;
+
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+
+    margin: 0 0 4px;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.1px;
+}
+
+.section-heading p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.section-heading-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   SMALL ACTION BUTTON
+   ========================================================= */
+
+.small-action-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 30px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d9def0;
+
+    border-radius: 7px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.small-action-btn:hover {
+
+    background: #e5e9ff;
+
+    border-color: #c9d0ff;
+
+    transform: translateY(-1px);
+}
+
+.small-action-btn:active {
+
+    transform: translateY(0);
+}
+
+.small-action-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   BASIC INFORMATION LAYOUT
+   ========================================================= */
+
+.category-section:first-child .form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   CATEGORY ID
+   ========================================================= */
+
+.category-section:first-child .category-id-group {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+}
+
+.category-id-group {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CATEGORY JAPANESE GROUP
+   ========================================================= */
+
+.category-jp-group {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CHECK ACTION AREA
+   ========================================================= */
+
+.category-check-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   CHECK BUTTON
+   ========================================================= */
+
+#check-category-btn {
+
+    flex-shrink: 0;
+
+    min-width: 72px;
+
+    height: 36px;
+
+    padding: 0 14px;
+
+    border: 1px solid #c7d2fe;
+
+    border-radius: 7px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: none;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+#check-category-btn:hover {
+
+    background: #e5e9ff;
+
+    border-color: #a5b4fc;
+
+    color: var(--accent-hover);
+
+    transform: translateY(-1px);
+}
+
+#check-category-btn:active {
+
+    transform: translateY(0);
+}
+
+#check-category-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   FIELD HELP
+   ========================================================= */
+
+.field-help {
+
+    display: block;
+
+    margin-top: 1px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY CHECK STATUS
+   ========================================================= */
+
+.category-check-status {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    min-height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    padding: 7px 7px 7px 13px;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY CHECK STATUS MESSAGE
+   ========================================================= */
+
+.category-check-status-message {
+
+    flex: 1;
+
+    min-width: 0;
+
+    word-break: break-word;
+
+    padding: 2px 0;
+}
+
+
+/* =========================================================
+   CATEGORY CHECK STATUS CLOSE BUTTON
+   ========================================================= */
+
+.category-check-status-close {
+
+    flex: 0 0 23px;
+
+    width: 23px;
+
+    height: 23px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    line-height: 23px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    opacity: 0.55;
+
+    transition:
+        background 0.15s ease,
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+
+.category-check-status-close:hover {
+
+    opacity: 1;
+
+    background: rgba(0, 0, 0, 0.07);
+
+    transform: scale(1.05);
+}
+
+.category-check-status-close:active {
+
+    opacity: 1;
+
+    transform: scale(0.95);
+}
+
+.category-check-status-close:focus {
+
+    outline: none;
+}
+
+.category-check-status-close:focus-visible {
+
+    outline: 2px solid currentColor;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   CHECK SUCCESS
+   ========================================================= */
+
+.category-check-status.success {
+
+    background: #ecfdf3;
+
+    border-color: #abefc6;
+
+    color: #067647;
+}
+
+
+/* =========================================================
+   CHECK ERROR
+   ========================================================= */
+
+.category-check-status.error {
+
+    background: #fef3f2;
+
+    border-color: #fecdca;
+
+    color: #b42318;
+}
+
+
+/* =========================================================
+   CHECK INFO
+   ========================================================= */
+
+.category-check-status.info {
+
+    background: #eff8ff;
+
+    border-color: #b2ddff;
+
+    color: #175cd3;
+}
+
+
+/* =========================================================
+   CHECK WARNING
+   ========================================================= */
+
+.category-check-status.warning {
+
+    background: #fffaeb;
+
+    border-color: #fedf89;
+
+    color: #b54708;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    min-width: 0;
+}
+
+.form-group label {
+
+    color: #475467;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--border-strong);
+
+    border-radius: 7px;
+
+    background: #fff;
+
+    color: var(--text-primary);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.form-group input {
+
+    height: 38px;
+
+    padding: 0 11px;
+}
+
+.form-group textarea {
+
+    min-height: 92px;
+
+    padding: 10px 11px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+.form-group select {
+
+    height: 38px;
+
+    padding: 0 10px;
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+
+    outline: none;
+
+    border-color: #a5b4fc;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.08);
+}
+
+
+/* =========================================================
+   DISABLED INPUTS
+   ========================================================= */
+
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+
+    background: #f3f4f6;
+
+    color: #98a2b3;
+
+    border-color: #e5e7eb;
+
+    cursor: not-allowed;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   DISABLED BUTTONS
+   ========================================================= */
+
+.category-editor-panel
+.category-section:not(:first-child)
+button:disabled {
+
+    background: #f3f4f6;
+
+    border-color: #e5e7eb;
+
+    color: #98a2b3;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   LOCKED SECTIONS
+   ========================================================= */
+
+.category-editor-panel.locked
+.category-section:not(:first-child) {
+
+    position: relative;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   LOCKED SECTION OVERLAY EFFECT
+   ========================================================= */
+
+.category-editor-panel.locked
+.category-section:not(:first-child)::after {
+
+    content: "Check Category ID to unlock";
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 16px;
+
+    padding: 4px 8px;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 5px;
+
+    background: #f9fafb;
+
+    color: #98a2b3;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   UNLOCKED SECTIONS
+   ========================================================= */
+
+.category-editor-panel:not(.locked)
+.category-section:not(:first-child) {
+
+    opacity: 1;
+
+    transition:
+        opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   KEYWORDS
+   ========================================================= */
+
+.keywords-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.description-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   KEY INFORMATION
+   ========================================================= */
+
+.key-information-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+/* =========================================================
+   KEY INFORMATION ROW
+   ========================================================= */
+
+.key-information-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(120px, 1fr)
+        105px
+        minmax(130px, 1.4fr)
+        30px;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 5px;
+
+    background: var(--surface-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.key-information-row:hover {
+
+    background: #fff;
+
+    border-color: #d7dce6;
+}
+
+
+/* =========================================================
+   KEY INFORMATION CONTROLS
+   ========================================================= */
+
+.key-information-row input,
+.key-information-row select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    height: 31px;
+
+    padding: 0 8px;
+
+    border: 1px solid #dde2ea;
+
+    border-radius: 5px;
+
+    background: #fff;
+
+    color: #344054;
+
+    font-family: inherit;
+
+    font-size: 11px;
+}
+
+.key-information-row input:focus,
+.key-information-row select:focus {
+
+    outline: none;
+
+    border-color: #a5b4fc;
+
+    box-shadow:
+        0 0 0 2px rgba(79, 70, 229, 0.07);
+}
+
+
+/* =========================================================
+   REMOVE ROW
+   ========================================================= */
+
+.remove-row-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 28px;
+
+    height: 28px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #98a2b3;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+.remove-row-btn:hover {
+
+    background: var(--danger-soft);
+
+    color: var(--danger);
+}
+
+.remove-row-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY FIELDS
+   ========================================================= */
+
+.empty-fields,
+.empty-media {
+
+    padding: 15px;
+
+    border: 1px dashed #d9dee8;
+
+    border-radius: 8px;
+
+    background: #fafbfc;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.media-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.media-row {
+
+    display: grid;
+
+    grid-template-columns:
+        90px
+        minmax(120px, 1fr)
+        minmax(150px, 1.5fr)
+        30px;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 5px;
+
+    background: var(--surface-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.media-row:hover {
+
+    background: #fff;
+
+    border-color: #d7dce6;
+}
+
+.media-row input,
+.media-row select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    height: 31px;
+
+    padding: 0 8px;
+
+    border: 1px solid #dde2ea;
+
+    border-radius: 5px;
+
+    background: #fff;
+
+    color: #344054;
+
+    font-family: inherit;
+
+    font-size: 11px;
+}
+
+.media-row input:focus,
+.media-row select:focus {
+
+    outline: none;
+
+    border-color: #a5b4fc;
+
+    box-shadow:
+        0 0 0 2px rgba(79, 70, 229, 0.07);
+}
+
+
+/* =========================================================
+   PREVIEW PANEL
+   ========================================================= */
+
+.category-preview-panel {
+
+    width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+    position: static;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   PREVIEW HEADER
+   ========================================================= */
+
+.preview-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 17px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #fafbff 100%
+        );
+
+    border-bottom: 1px solid var(--border);
+}
+
+.preview-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--accent);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.preview-header h2 {
+
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PREVIEW BUTTON
+   ========================================================= */
+
+#preview-btn {
+
+    height: 32px;
+
+    padding: 0 12px;
+
+    background: var(--accent-soft);
+
+    border-color: #d9def0;
+
+    color: var(--accent);
+
+    font-size: 11px;
+
+    box-shadow: none;
+}
+
+#preview-btn:hover {
+
+    background: #e5e9ff;
+
+    border-color: #c9d0ff;
+
+    color: var(--accent-hover);
+}
+
+
+/* =========================================================
+   PREVIEW BODY
+   ========================================================= */
+
+.category-preview {
+
+    width: 100%;
+
+    min-height: 700px;
+
+    box-sizing: border-box;
+
+    padding: 22px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(79, 70, 229, 0.04),
+            transparent 35%
+        ),
+        #f8f9fc;
+}
+
+
+/* =========================================================
+   EMPTY PREVIEW
+   ========================================================= */
+
+.empty-preview {
+
+    min-height: 600px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--text-muted);
+}
+
+.empty-preview-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 58px;
+
+    height: 58px;
+
+    margin-bottom: 14px;
+
+    border-radius: 16px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 25px;
+}
+
+.empty-preview h3 {
+
+    margin: 0 0 6px;
+
+    color: #344054;
+
+    font-size: 15px;
+}
+
+.empty-preview p {
+
+    max-width: 260px;
+
+    margin: 0;
+
+    color: #98a2b3;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PREVIEW CATEGORY
+   ========================================================= */
+
+.preview-category {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 24px;
+
+    background: #fff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   PREVIEW CATEGORY HEADER
+   ========================================================= */
+
+.preview-category-header {
+
+    padding-bottom: 18px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+.preview-category-label {
+
+    display: inline-block;
+
+    color: var(--accent);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.preview-category-header h2 {
+
+    margin: 7px 0 4px;
+
+    color: var(--text-primary);
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: -0.4px;
+}
+
+.preview-japanese-name {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   PREVIEW BLOCK
+   ========================================================= */
+
+.preview-block {
+
+    margin-bottom: 22px;
+}
+
+.preview-block:last-child {
+
+    margin-bottom: 0;
+}
+
+.preview-block h3 {
+
+    margin: 0 0 9px;
+
+    color: #344054;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.preview-block p {
+
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PREVIEW TAGS
+   ========================================================= */
+
+.preview-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.preview-tags span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 26px;
+
+    padding: 0 9px;
+
+    border: 1px solid #e1e5ee;
+
+    border-radius: 20px;
+
+    background: #f8f9fc;
+
+    color: #475467;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PREVIEW INFORMATION
+   ========================================================= */
+
+.preview-information {
+
+    width: 100%;
+
+    border: 1px solid #e8ebf0;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.preview-information-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 10px 12px;
+
+    background: #fff;
+
+    border-bottom: 1px solid #eef0f3;
+}
+
+.preview-information-row:last-child {
+
+    border-bottom: none;
+}
+
+.preview-information-row span {
+
+    color: #667085;
+
+    font-size: 12px;
+}
+
+.preview-information-row strong {
+
+    max-width: 55%;
+
+    color: #344054;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   PREVIEW MEDIA
+   ========================================================= */
+
+.preview-media-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.preview-media-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 10px;
+
+    background: #fff;
+
+    border: 1px solid #e8ebf0;
+
+    border-radius: 8px;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.preview-media-item:hover {
+
+    border-color: #d7dce6;
+
+    box-shadow: var(--shadow-sm);
+}
+
+.preview-media-item > span {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background: var(--accent-soft);
+
+    font-size: 14px;
+}
+
+.preview-media-item div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    min-width: 0;
+}
+
+.preview-media-item strong {
+
+    color: #344054;
+
+    font-size: 12px;
+
+    word-break: break-word;
+}
+
+.preview-media-item small {
+
+    color: #98a2b3;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .category-editor-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .category-preview-panel {
+
+        margin-top: 2px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .category-content-page {
+
+        padding: 24px 20px 40px;
+    }
+
+    .category-content-header {
+
+        flex-direction: column;
+    }
+
+    .category-header-actions {
+
+        width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+    .form-grid,
+    .keywords-grid,
+    .description-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .category-section:first-child .category-id-group {
+
+        grid-column: auto;
+    }
+
+
+    /* ========================================
+       CHECK BUTTON
+       ======================================== */
+
+    .category-check-actions {
+
+        justify-content: flex-end;
+
+        margin-top: 8px;
+    }
+
+    #check-category-btn {
+
+        width: auto;
+
+        min-width: 72px;
+    }
+
+
+    /* ========================================
+       KEY INFORMATION
+       ======================================== */
+
+    .key-information-row {
+
+        grid-template-columns:
+            minmax(100px, 1fr)
+            90px
+            minmax(100px, 1fr)
+            30px;
+    }
+
+
+    /* ========================================
+       MEDIA
+       ======================================== */
+
+    .media-row {
+
+        grid-template-columns:
+            80px
+            minmax(100px, 1fr)
+            minmax(120px, 1fr)
+            30px;
+    }
+
+
+    /* ========================================
+       LOCK OVERLAY
+       ======================================== */
+
+    .category-editor-panel.locked
+    .category-section:not(:first-child)::after {
+
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .category-content-page {
+
+        padding: 18px 14px 30px;
+    }
+
+    .category-header-left {
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .category-title-area h1 {
+
+        font-size: 24px;
+    }
+
+    .category-header-actions {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .category-header-actions .primary-btn {
+
+        grid-column: 1 / -1;
+    }
+
+
+    /* ========================================
+       CONTENT STATUS
+       ======================================== */
+
+    .category-content-status {
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+        padding: 8px 8px 8px 12px;
+    }
+
+    .category-content-status-close {
+
+        flex: 0 0 23px;
+
+        width: 23px;
+
+        height: 23px;
+
+        font-size: 17px;
+    }
+
+
+    /* ========================================
+       CHECK STATUS
+       ======================================== */
+
+    .category-check-status {
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+        padding: 7px 7px 7px 11px;
+    }
+
+    .category-check-status-close {
+
+        flex: 0 0 22px;
+
+        width: 22px;
+
+        height: 22px;
+
+        font-size: 16px;
+    }
+
+
+    /* ========================================
+       SECTION
+       ======================================== */
+
+    .category-section {
+
+        padding: 16px;
+    }
+
+    .section-heading-row {
+
+        align-items: flex-start;
+    }
+
+
+    /* ========================================
+       CHECK BUTTON
+       ======================================== */
+
+    .category-check-actions {
+
+        justify-content: flex-end;
+
+        margin-top: 8px;
+    }
+
+    #check-category-btn {
+
+        width: auto;
+
+        min-width: 72px;
+
+        height: 36px;
+
+        padding: 0 14px;
+    }
+
+
+    /* ========================================
+       KEY INFORMATION
+       ======================================== */
+
+    .key-information-row {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ========================================
+       MEDIA
+       ======================================== */
+
+    .media-row {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ========================================
+       PREVIEW
+       ======================================== */
+
+    .preview-category {
+
+        padding: 18px;
+    }
+
+    .preview-information-row {
+
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+    .preview-information-row strong {
+
+        max-width: 100%;
+
+        text-align: left;
+    }
+}
+
+/* ========================================
+   Hide dismissed status messages
+   ======================================== */
+
+.category-content-status[hidden],
+.category-check-status[hidden] {
+    display: none !important;
+}
