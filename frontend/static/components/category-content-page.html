@@ -332,6 +332,15 @@
                         <button
                             type="button"
                             class="small-action-btn"
+                            id="excel-example-btn"
+                        >
+                            Excel Example
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="small-action-btn"
                             id="add-key-information-btn"
                         >
                             + Add Field
@@ -457,3 +466,78 @@
     </div>
 
 </section>
+
+
+<!-- ========================================
+     Excel Example Modal
+     ======================================== -->
+
+<div
+    id="excel-example-modal"
+    class="excel-example-modal"
+    hidden
+>
+
+    <!-- Background Overlay -->
+
+    <div
+        class="excel-example-overlay"
+        id="excel-example-overlay"
+    ></div>
+
+
+    <!-- Modal Window -->
+
+    <div class="excel-example-dialog">
+
+
+        <!-- ====================================
+             Modal Header
+             ==================================== -->
+
+        <div class="excel-example-header">
+
+            <div>
+
+                <h2>
+                    Excel Format Example
+                </h2>
+
+                <p>
+                    Use this format when importing Key Information.
+                </p>
+
+            </div>
+
+
+            <!-- Close Button -->
+
+            <button
+                type="button"
+                class="excel-example-close"
+                id="excel-example-close"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- ====================================
+             Modal Body
+             ==================================== -->
+
+        <div class="excel-example-body">
+
+            <img
+                src="/static/images/excel-example.png"
+                alt="Excel format example"
+                class="excel-example-image"
+            >
+
+        </div>
+
+    </div>
+
+</div>
