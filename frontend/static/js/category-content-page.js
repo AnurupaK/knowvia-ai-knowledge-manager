@@ -31,14 +31,6 @@ export async function loadCategoryContentPage(
     );
 
 
-    /*
-        Existing category:
-            - Category ID exists
-            - isNew is false
-
-        New category:
-            - isNew is true
-    */
     isExistingCategory =
         Boolean(
             currentSubcategory?.id
@@ -1021,51 +1013,145 @@ async function parseKeyInformationExcel(
 
 
     /* ========================================
-       Validate Header
+       Find Header Row
        ======================================== */
 
-    const header =
-        rows[0].map(
-            value =>
-                String(
-                    value ?? ""
-                ).trim()
-        );
+    /*
+        The header does NOT have to be row 1.
 
+        Example:
 
-    const expectedHeaders = [
-        "Field Name",
-        "Type",
-        "Value"
+        ItemDetails
+        Field Name | Type | Value
+
+        will work.
+
+        We also allow extra columns around
+        the required columns.
+    */
+
+    const normalizedExpectedHeaders = [
+        "field name",
+        "type",
+        "value"
     ];
 
 
-    const headersMatch =
-        header.length ===
-            expectedHeaders.length &&
-        expectedHeaders.every(
-            (
-                expectedHeader,
-                index
-            ) =>
-                header[index] ===
-                expectedHeader
+    let headerRowIndex =
+        -1;
+
+
+    let headerColumnIndexes =
+        null;
+
+
+    for (
+        let rowIndex = 0;
+        rowIndex < rows.length;
+        rowIndex++
+    ) {
+
+        const row =
+            Array.isArray(
+                rows[rowIndex]
+            )
+                ? rows[rowIndex]
+                : [];
+
+
+        const normalizedRow =
+            row.map(
+                value =>
+                    String(
+                        value ?? ""
+                    )
+                        .trim()
+                        .toLowerCase()
+            );
+
+
+        const fieldNameIndex =
+            normalizedRow.indexOf(
+                normalizedExpectedHeaders[0]
+            );
+
+
+        const typeIndex =
+            normalizedRow.indexOf(
+                normalizedExpectedHeaders[1]
+            );
+
+
+        const valueIndex =
+            normalizedRow.indexOf(
+                normalizedExpectedHeaders[2]
+            );
+
+
+        if (
+            fieldNameIndex !== -1 &&
+            typeIndex !== -1 &&
+            valueIndex !== -1
+        ) {
+
+            headerRowIndex =
+                rowIndex;
+
+
+            headerColumnIndexes = {
+
+                fieldName:
+                    fieldNameIndex,
+
+                type:
+                    typeIndex,
+
+                value:
+                    valueIndex
+
+            };
+
+
+            break;
+
+        }
+
+    }
+
+
+    if (
+        headerRowIndex === -1 ||
+        !headerColumnIndexes
+    ) {
+
+        console.error(
+            "Could not find required Excel headers."
         );
 
 
-    if (!headersMatch) {
-
         console.error(
-            "Invalid Excel headers:",
-            header
+            "Excel rows:",
+            rows
         );
 
 
         throw new Error(
-            "Excel structure didn't match. The columns must be exactly: Field Name, Type, Value."
+            "Excel structure didn't match. The Excel file must contain these columns: Field Name, Type, Value."
         );
 
     }
+
+
+    console.log(
+        "Excel header row found:",
+        headerRowIndex + 1
+    );
+
+
+    console.log(
+        "Excel column positions:",
+        headerColumnIndexes
+    );
 
 
     /* ========================================
@@ -1100,39 +1186,42 @@ async function parseKeyInformationExcel(
        ======================================== */
 
     for (
-        let index = 1;
+        let index =
+            headerRowIndex + 1;
+
         index < rows.length;
+
         index++
     ) {
 
         const row =
-            rows[index];
-
-
-        if (
-            !row ||
-            row.length === 0
-        ) {
-
-            continue;
-
-        }
+            Array.isArray(
+                rows[index]
+            )
+                ? rows[index]
+                : [];
 
 
         const fieldName =
             String(
-                row[0] ?? ""
+                row[
+                    headerColumnIndexes.fieldName
+                ] ?? ""
             ).trim();
 
 
         const typeText =
             String(
-                row[1] ?? ""
+                row[
+                    headerColumnIndexes.type
+                ] ?? ""
             ).trim();
 
 
         const rawValue =
-            row[2] ?? "";
+            row[
+                headerColumnIndexes.value
+            ] ?? "";
 
 
         /*
@@ -1165,7 +1254,7 @@ async function parseKeyInformationExcel(
         if (!typeText) {
 
             throw new Error(
-                `Excel structure didn't match. Type is missing in row ${index + 1}.`
+                `Excel structure didn't match. Type is missing for "${fieldName}" in row ${index + 1}.`
             );
 
         }
@@ -1184,7 +1273,7 @@ async function parseKeyInformationExcel(
         ) {
 
             throw new Error(
-                `Excel structure didn't match. Invalid Type "${typeText}" in row ${index + 1}. Allowed types are: Text, Textarea, Time, Number, Boolean.`
+                `Excel structure didn't match. Invalid Type "${typeText}" for "${fieldName}" in row ${index + 1}. Allowed types are: Text, Textarea, Time, Number, Boolean.`
             );
 
         }
@@ -1250,12 +1339,10 @@ function convertExcelValue(
 ) {
 
     /*
-        IMPORTANT:
-
         The UI always uses a normal text
         input.
 
-        Type is only metadata.
+        Type is metadata only.
 
         We still normalize the value
         according to its declared type
@@ -1387,7 +1474,7 @@ function convertExcelValue(
         ) {
 
             throw new Error(
-                `Excel structure didn't match. "${rawValue}" is not a valid Number in row ${rowNumber}.`
+                `"${rawValue}" is not a valid Number in row ${rowNumber}.`
             );
 
         }
@@ -1448,7 +1535,7 @@ function convertExcelValue(
 
 
         throw new Error(
-            `Excel structure didn't match. "${rawValue}" is not a valid Boolean in row ${rowNumber}. Use true or false.`
+            `"${rawValue}" is not a valid Boolean in row ${rowNumber}. Use true or false.`
         );
 
     }
@@ -2540,13 +2627,7 @@ function createKeyInformationRow(
 
 
     /*
-        ========================================
-        VALUE INPUT
-        ========================================
-
-        ALWAYS a normal text input.
-
-        Type does not change the UI.
+        ALWAYS use one normal text input.
     */
     const valueContainer =
         row.querySelector(
@@ -2566,9 +2647,7 @@ function createKeyInformationRow(
 
 
     /*
-        ========================================
         Remove field
-        ========================================
     */
     row
         .querySelector(
@@ -2600,14 +2679,8 @@ function createKeyInformationRow(
 
 
     /*
-        ========================================
-        Type Change
-        ========================================
-
         Type is metadata only.
-
-        Changing the type does NOT replace
-        the normal text input.
+        The UI remains a normal text input.
     */
     row
         .querySelector(
@@ -2639,9 +2712,6 @@ function createKeyInformationRow(
 
 /* ========================================
    Create Key Information Value Element
-   ========================================
-
-   ALWAYS creates one normal text input.
    ======================================== */
 
 function createKeyInformationValueElement(
@@ -3040,7 +3110,7 @@ function collectCategoryData() {
 
 
                 /*
-                    ALWAYS read from the normal
+                    ALWAYS read from normal
                     text input.
                 */
                 let value =
@@ -3051,8 +3121,6 @@ function collectCategoryData() {
 
                 /*
                     NUMBER
-                    Type remains metadata, but
-                    saved value is converted.
                 */
                 if (
                     fieldType === "number"
@@ -3079,8 +3147,6 @@ function collectCategoryData() {
 
                 /*
                     BOOLEAN
-                    Normal text input in UI.
-                    Convert to boolean when saving.
                 */
                 if (
                     fieldType === "boolean"
@@ -3305,6 +3371,7 @@ function saveCategory() {
         );
 
         return;
+
     }
 
 
@@ -3316,6 +3383,7 @@ function saveCategory() {
         );
 
         return;
+
     }
 
 
