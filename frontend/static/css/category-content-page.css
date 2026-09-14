@@ -2,28 +2,36 @@
    CATEGORY CONTENT PAGE
 
    Professional SaaS / Management Dashboard Design
-
    ========================================================= */
 
 :root {
 
     --page-bg: #f5f7fb;
+
     --surface: #ffffff;
+
     --surface-soft: #f8f9fc;
 
     --text-primary: #172033;
+
     --text-secondary: #667085;
+
     --text-muted: #98a2b3;
 
     --border: #e6e9ef;
+
     --border-strong: #d9dee8;
 
     --accent: #4f46e5;
+
     --accent-hover: #4338ca;
+
     --accent-soft: #eef2ff;
 
     --success: #12b76a;
+
     --danger: #ef4444;
+
     --danger-soft: #fef2f2;
 
     --shadow-sm:
@@ -36,7 +44,9 @@
         0 12px 30px rgba(16, 24, 40, 0.08);
 
     --radius-sm: 6px;
+
     --radius-md: 10px;
+
     --radius-lg: 14px;
 }
 
@@ -48,6 +58,7 @@
 .category-content-page {
 
     width: 100%;
+
     max-width: 1680px;
 
     margin: 0 auto;
@@ -559,6 +570,22 @@
     gap: 16px;
 
     margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   SECTION HEADING ACTIONS
+   ========================================================= */
+
+.section-heading-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
 }
 
 
@@ -2157,6 +2184,22 @@ button:disabled {
     .section-heading-row {
 
         align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* ========================================
+       SECTION HEADING ACTIONS
+       ======================================== */
+
+    .section-heading-actions {
+
+        width: 100%;
+
+        justify-content: flex-end;
+
+        flex-wrap: wrap;
     }
 
 
@@ -2227,11 +2270,13 @@ button:disabled {
     }
 }
 
-/* ========================================
-   Hide dismissed status messages
-   ======================================== */
+
+/* =========================================================
+   HIDE DISMISSED STATUS MESSAGES
+   ========================================================= */
 
 .category-content-status[hidden],
 .category-check-status[hidden] {
+
     display: none !important;
 }

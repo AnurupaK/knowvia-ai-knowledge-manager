@@ -70,12 +70,14 @@ function setupFAQContentPage() {
 
 
     /*
-        Check whether the category content
-        itself exists in S3.
+        New categories cannot create FAQ content
+        until the category content itself exists.
 
-        New categories do not have category
-        content yet, so the FAQ page will
-        remain disabled.
+        Existing categories are handled using
+        local FAQ drafts first.
+
+        We DO NOT automatically fetch FAQ data
+        from S3 for existing categories.
     */
 
     if (
@@ -84,14 +86,9 @@ function setupFAQContentPage() {
         getCategoryId()
     ) {
 
-        checkCategoryContent();
+        loadExistingFAQState();
 
     } else {
-
-        /*
-            New category or missing Category ID.
-            Category content has not been created yet.
-        */
 
         disableFAQPage();
 
@@ -100,6 +97,91 @@ function setupFAQContentPage() {
             "error"
         );
     }
+}
+
+
+/* ========================================
+   Load Existing FAQ State
+   ======================================== */
+
+function loadExistingFAQState() {
+
+    const categoryId =
+        getCategoryId();
+
+
+    if (!categoryId) {
+
+        categoryExistsInS3 =
+            false;
+
+        disableFAQPage();
+
+        showFAQStatus(
+            "Category ID is missing.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /*
+        First priority:
+        Load locally saved FAQ draft.
+    */
+
+    const localDraft =
+        findLocalFAQDraft(
+            categoryId,
+            getCategoryName()
+        );
+
+
+    if (localDraft) {
+
+        faqData =
+            normalizeFAQData(
+                localDraft.faqs || []
+            );
+
+        categoryExistsInS3 =
+            true;
+
+        renderFAQList();
+
+        showFAQStatus(
+            "Local FAQ draft loaded successfully.",
+            "success"
+        );
+
+        return;
+    }
+
+
+    /*
+        No local draft.
+
+        Do NOT fetch FAQ from S3 automatically.
+
+        The user can explicitly click
+        "Fetch from S3" if they want the
+        current S3 FAQ data.
+    */
+
+    categoryExistsInS3 =
+        false;
+
+    faqData =
+        [];
+
+    renderFAQList();
+
+
+    showFAQStatus(
+        "No local FAQ draft found. You can create FAQs or click Fetch from S3 to load the current S3 FAQ data.",
+        "info"
+    );
 }
 
 
@@ -345,174 +427,222 @@ function createInitialFAQState() {
 
 
 /* ========================================
-   Check Category Content
+   Find Local FAQ Draft
    ======================================== */
 
-async function checkCategoryContent() {
+function findLocalFAQDraft(
+    categoryId,
+    categoryName
+) {
 
-    const categoryId =
-        getCategoryId();
+    /*
+        First try exact Category ID.
+    */
 
+    if (categoryId) {
+
+        const draft =
+            loadLocalFAQDraft(
+                categoryId
+            );
+
+
+        if (draft) {
+            return draft;
+        }
+    }
+
+
+    /*
+        Fallback:
+        Search all FAQ drafts by category name.
+
+        This helps recover drafts created before
+        the category ID was known by the manage page.
+    */
+
+    if (!categoryName) {
+        return null;
+    }
+
+
+    const targetName =
+        categoryName
+            .trim()
+            .toLowerCase();
+
+
+    for (
+        let index = 0;
+        index < localStorage.length;
+        index++
+    ) {
+
+        const key =
+            localStorage.key(index);
+
+
+        if (
+            !key ||
+            !key.startsWith(
+                "faq_draft_"
+            )
+        ) {
+            continue;
+        }
+
+
+        try {
+
+            const savedDraft =
+                localStorage.getItem(
+                    key
+                );
+
+
+            if (!savedDraft) {
+                continue;
+            }
+
+
+            const draft =
+                JSON.parse(
+                    savedDraft
+                );
+
+
+            if (
+                !draft ||
+                !draft.category_id ||
+                !draft.category_en ||
+                !Array.isArray(
+                    draft.faqs
+                )
+            ) {
+                continue;
+            }
+
+
+            const draftName =
+                draft.category_en
+                    .trim()
+                    .toLowerCase();
+
+
+            if (
+                draftName ===
+                targetName
+            ) {
+
+                return draft;
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Invalid local FAQ draft:",
+                key,
+                error
+            );
+        }
+    }
+
+
+    return null;
+}
+
+
+/* ========================================
+   Load Local FAQ Draft
+   ======================================== */
+
+function loadLocalFAQDraft(
+    categoryId
+) {
 
     if (!categoryId) {
+        return null;
+    }
 
-        categoryExistsInS3 =
-            false;
 
-        disableFAQPage();
+    const storageKey =
+        `faq_draft_${categoryId}`;
 
-        showFAQStatus(
-            "The content for this topic is not created yet. Please create the category content first.",
-            "error"
+
+    const savedData =
+        localStorage.getItem(
+            storageKey
         );
 
-        return;
+
+    if (!savedData) {
+        return null;
     }
 
 
     try {
 
-        showFAQStatus(
-            "Checking category content...",
-            "info"
+        return JSON.parse(
+            savedData
         );
-
-
-        const categoryExists =
-            await checkCategoryExistsInS3(
-                categoryId
-            );
-
-
-        /*
-            Category itself does not exist.
-            FAQ page must remain disabled.
-        */
-
-        if (!categoryExists) {
-
-            disableFAQPage();
-
-            showFAQStatus(
-                "The content for this topic is not created yet. Please create the category content first.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        /*
-            Category exists.
-
-            Now try to fetch FAQ data.
-
-            If FAQ does not exist, fetchFAQFromS3()
-            will simply leave an empty FAQ list.
-        */
-
-        await fetchFAQFromS3();
-
 
     } catch (error) {
 
         console.error(
-            "Category content check failed:",
+            "Failed to parse local FAQ draft:",
             error
         );
 
-
-        categoryExistsInS3 =
-            false;
-
-
-        disableFAQPage();
-
-        showFAQStatus(
-            "The content for this topic is not created yet. Please create the category content first.",
-            "error"
-        );
+        return null;
     }
 }
 
 
 /* ========================================
-   Disable FAQ Page
+   Normalize FAQ Data
    ======================================== */
 
-function disableFAQPage() {
+function normalizeFAQData(
+    faqs
+) {
 
-    const page =
-        document.querySelector(
-            ".faq-content-page"
-        );
-
-
-    if (!page) {
-        return;
+    if (!Array.isArray(faqs)) {
+        return [];
     }
 
 
-    const controls =
-        page.querySelectorAll(
-            "button, input, textarea, select"
-        );
+    return faqs.map(
+        faq => ({
 
+            id:
+                faq.id ||
+                "",
 
-    controls.forEach(
-        control => {
+            question_en:
+                faq.question_en ||
+                "",
 
-            if (
-                control.id ===
-                "faq-back-btn"
-            ) {
-                return;
-            }
+            question_jp:
+                faq.question_jp ||
+                "",
 
+            answer_en:
+                faq.answer_en ||
+                "",
 
-            control.disabled =
-                true;
-        }
+            answer_jp:
+                faq.answer_jp ||
+                "",
+
+            follow_ups:
+                Array.isArray(
+                    faq.follow_ups
+                )
+                    ? faq.follow_ups
+                    : []
+
+        })
     );
-
-
-    const sections =
-        page.querySelectorAll(
-            ".faq-generate-section, " +
-            ".faq-editor-section, " +
-            ".faq-preview-section"
-        );
-
-
-    sections.forEach(
-        section => {
-
-            section.style.opacity =
-                "0.55";
-
-            section.style.pointerEvents =
-                "none";
-        }
-    );
-
-
-    const backButton =
-        document.getElementById(
-            "faq-back-btn"
-        );
-
-
-    if (backButton) {
-
-        backButton.disabled =
-            false;
-
-        backButton.style.opacity =
-            "";
-
-        backButton.style.pointerEvents =
-            "";
-    }
 }
 
 
@@ -537,10 +667,22 @@ async function generateFAQs() {
     }
 
 
+    /*
+        Claude generation requires the category
+        content to exist in S3.
+
+        If the user has only opened an existing
+        category but has not fetched from S3,
+        we don't yet know whether the category
+        content exists there.
+
+        Therefore ask them to fetch first.
+    */
+
     if (!categoryExistsInS3) {
 
         showFAQStatus(
-            "The content for this topic is not created yet. Please create the category content first.",
+            "Please click Fetch from S3 first so the category content can be verified before generating FAQs.",
             "error"
         );
 
@@ -615,7 +757,9 @@ async function generateFAQs() {
 
 
         faqData =
-            generatedFAQs;
+            normalizeFAQData(
+                generatedFAQs
+            );
 
 
         normalizeFAQIds();
@@ -651,71 +795,6 @@ async function generateFAQs() {
         );
 
         updateGenerateButtonState();
-    }
-}
-
-
-/* ========================================
-   Check Category Exists in S3
-   ======================================== */
-
-async function checkCategoryExistsInS3(
-    categoryId
-) {
-
-    try {
-
-        const response =
-            await fetch(
-                `/api/knowledge/categories/${encodeURIComponent(
-                    categoryId
-                )}`
-            );
-
-
-        if (!response.ok) {
-
-            categoryExistsInS3 =
-                false;
-
-            return false;
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (
-            !data ||
-            typeof data !== "object"
-        ) {
-
-            categoryExistsInS3 =
-                false;
-
-            return false;
-        }
-
-
-        categoryExistsInS3 =
-            true;
-
-        return true;
-
-
-    } catch (error) {
-
-        console.error(
-            "Category existence check failed:",
-            error
-        );
-
-
-        categoryExistsInS3 =
-            false;
-
-        return false;
     }
 }
 
@@ -1298,11 +1377,6 @@ function setupFAQCardEvents(
             "click",
             (event) => {
 
-                /*
-                    Prevent the delete button click
-                    from also selecting the FAQ card.
-                */
-
                 event.stopPropagation();
 
 
@@ -1332,11 +1406,6 @@ function setupFAQCardEvents(
             checkbox.addEventListener(
                 "change",
                 (event) => {
-
-                    /*
-                        Prevent checkbox interaction
-                        from changing card selection.
-                    */
 
                     event.stopPropagation();
 
@@ -1388,11 +1457,6 @@ function setupFAQCardEvents(
         }
     );
 
-
-    /*
-        Prevent inputs and textareas from
-        selecting the FAQ card while editing.
-    */
 
     const editableFields =
         card.querySelectorAll(
@@ -1636,6 +1700,57 @@ async function fetchFAQFromS3() {
         );
 
 
+        /*
+            First verify that the category itself
+            exists in S3.
+        */
+
+        const categoryResponse =
+            await fetch(
+                `/api/knowledge/categories/${encodeURIComponent(
+                    categoryId
+                )}`
+            );
+
+
+        if (!categoryResponse.ok) {
+
+            categoryExistsInS3 =
+                false;
+
+            throw new Error(
+                "The category content does not exist in S3. Please create and send the category content first."
+            );
+        }
+
+
+        const categoryData =
+            await categoryResponse
+                .json();
+
+
+        if (
+            !categoryData ||
+            typeof categoryData !== "object"
+        ) {
+
+            categoryExistsInS3 =
+                false;
+
+            throw new Error(
+                "Invalid category data received from S3."
+            );
+        }
+
+
+        categoryExistsInS3 =
+            true;
+
+
+        /*
+            Now fetch FAQ data.
+        */
+
         const response =
             await fetch(
                 `/api/knowledge/categories/${encodeURIComponent(
@@ -1647,10 +1762,8 @@ async function fetchFAQFromS3() {
         /*
             FAQ file does not exist.
 
-            This is NOT an error.
-
-            The category itself already exists,
-            so the user can create new FAQs.
+            This is NOT an error because the
+            category itself exists.
         */
 
         if (!response.ok) {
@@ -1658,6 +1771,16 @@ async function fetchFAQFromS3() {
             faqData = [];
 
             renderFAQList();
+
+
+            /*
+                User explicitly selected S3,
+                so remove any local draft.
+            */
+
+            localStorage.removeItem(
+                `faq_draft_${categoryId}`
+            );
 
 
             showFAQStatus(
@@ -1688,12 +1811,40 @@ async function fetchFAQFromS3() {
 
 
         faqData =
-            data.faqs;
+            normalizeFAQData(
+                data.faqs
+            );
 
 
         normalizeFAQIds();
 
         renderFAQList();
+
+
+        /*
+            User explicitly selected S3,
+            so the S3 version becomes the
+            active source and local draft
+            is removed.
+        */
+
+        localStorage.removeItem(
+            `faq_draft_${categoryId}`
+        );
+
+
+        /*
+            Keep a normal local cache too.
+        */
+
+        localStorage.setItem(
+            `faq_${categoryId}`,
+            JSON.stringify(
+                collectFAQData(),
+                null,
+                2
+            )
+        );
 
 
         showFAQStatus(
@@ -1787,20 +1938,73 @@ function saveFAQ() {
     }
 
 
+    const categoryId =
+        getCategoryId();
+
+
+    if (!categoryId) {
+
+        showFAQStatus(
+            "Category ID is missing.",
+            "error"
+        );
+
+        return;
+    }
+
+
     const data =
         collectFAQData();
 
 
+    /*
+        Normal local cache.
+    */
+
+    const cacheStorageKey =
+        `faq_${categoryId}`;
+
+
     localStorage.setItem(
-        "faqContentData",
+        cacheStorageKey,
         JSON.stringify(
-            data
+            data,
+            null,
+            2
         )
     );
 
 
+    /*
+        Authoritative local draft.
+
+        This is what should be loaded when
+        the user comes back before sending
+        the data to S3.
+    */
+
+    const draftStorageKey =
+        `faq_draft_${categoryId}`;
+
+
+    localStorage.setItem(
+        draftStorageKey,
+        JSON.stringify(
+            data,
+            null,
+            2
+        )
+    );
+
+
+    console.log(
+        "FAQ draft saved:",
+        draftStorageKey
+    );
+
+
     showFAQStatus(
-        "FAQ data saved locally.",
+        "FAQ data saved locally as a draft.",
         "success"
     );
 }
@@ -1827,10 +2031,15 @@ async function sendFAQToS3() {
     }
 
 
+    /*
+        Sending FAQ requires the category
+        content to exist in S3.
+    */
+
     if (!categoryExistsInS3) {
 
         showFAQStatus(
-            "The content for this topic is not created yet. Please create the category content first.",
+            "Please click Fetch from S3 first to verify that the category content exists.",
             "error"
         );
 
@@ -1883,10 +2092,59 @@ async function sendFAQToS3() {
 
         if (!response.ok) {
 
+            let errorMessage =
+                "Failed to send FAQ data to S3.";
+
+
+            try {
+
+                const errorData =
+                    await response.json();
+
+
+                errorMessage =
+                    errorData.error ||
+                    errorData.message ||
+                    errorMessage;
+
+            } catch (error) {
+
+                /*
+                    Ignore JSON parsing errors.
+                */
+            }
+
+
             throw new Error(
-                "Failed to send FAQ data to S3."
+                errorMessage
             );
         }
+
+
+        /*
+            Keep normal cache.
+        */
+
+        localStorage.setItem(
+            `faq_${categoryId}`,
+            JSON.stringify(
+                data,
+                null,
+                2
+            )
+        );
+
+
+        /*
+            IMPORTANT:
+
+            Once successfully sent to S3,
+            the local draft is no longer needed.
+        */
+
+        localStorage.removeItem(
+            `faq_draft_${categoryId}`
+        );
 
 
         showFAQStatus(
@@ -2161,6 +2419,86 @@ function setSendLoadingState(
 
 
 /* ========================================
+   Disable FAQ Page
+   ======================================== */
+
+function disableFAQPage() {
+
+    const page =
+        document.querySelector(
+            ".faq-content-page"
+        );
+
+
+    if (!page) {
+        return;
+    }
+
+
+    const controls =
+        page.querySelectorAll(
+            "button, input, textarea, select"
+        );
+
+
+    controls.forEach(
+        control => {
+
+            if (
+                control.id ===
+                "faq-back-btn"
+            ) {
+                return;
+            }
+
+
+            control.disabled =
+                true;
+        }
+    );
+
+
+    const sections =
+        page.querySelectorAll(
+            ".faq-generate-section, " +
+            ".faq-editor-section, " +
+            ".faq-preview-section"
+        );
+
+
+    sections.forEach(
+        section => {
+
+            section.style.opacity =
+                "0.55";
+
+            section.style.pointerEvents =
+                "none";
+        }
+    );
+
+
+    const backButton =
+        document.getElementById(
+            "faq-back-btn"
+        );
+
+
+    if (backButton) {
+
+        backButton.disabled =
+            false;
+
+        backButton.style.opacity =
+            "";
+
+        backButton.style.pointerEvents =
+            "";
+    }
+}
+
+
+/* ========================================
    Status Message
    ======================================== */
 
@@ -2188,11 +2526,6 @@ function showFAQStatus(
         "hidden"
     );
 
-
-    /*
-        Status colors are defined here
-        in one place.
-    */
 
     const statusColors = {
 

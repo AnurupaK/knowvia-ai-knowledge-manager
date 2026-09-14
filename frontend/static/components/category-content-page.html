@@ -36,7 +36,10 @@
                 Send to S3
             </button>
 
-            <button class="action-btn primary-btn" id="save-category-content-btn">
+            <button
+                class="action-btn primary-btn"
+                id="save-category-content-btn"
+            >
                 Save
             </button>
 
@@ -49,7 +52,11 @@
          Category Status Message
          ======================================== -->
 
-    <div id="category-content-status" class="category-content-status" hidden></div>
+    <div
+        id="category-content-status"
+        class="category-content-status"
+        hidden
+    ></div>
 
 
     <!-- ========================================
@@ -67,8 +74,8 @@
 
 
             <!-- ====================================
-     Basic Information
-     ==================================== -->
+                 Basic Information
+                 ==================================== -->
 
             <section class="category-section">
 
@@ -89,8 +96,8 @@
 
 
                     <!-- ====================================
-             Category ID
-             ==================================== -->
+                         Category ID
+                         ==================================== -->
 
                     <div class="form-group category-id-group">
 
@@ -98,9 +105,16 @@
                             Category ID
                         </label>
 
-                        <input type="text" id="category-id" placeholder="ryukyuAI_001">
+                        <input
+                            type="text"
+                            id="category-id"
+                            placeholder="ryukyuAI_001"
+                        >
 
-                        <span class="field-help" id="category-id-help">
+                        <span
+                            class="field-help"
+                            id="category-id-help"
+                        >
                             Enter the Category ID and click Check before editing other information.
                         </span>
 
@@ -108,8 +122,8 @@
 
 
                     <!-- ====================================
-             Category Name English
-             ==================================== -->
+                         Category Name English
+                         ==================================== -->
 
                     <div class="form-group">
 
@@ -117,14 +131,18 @@
                             Category Name (English)
                         </label>
 
-                        <input type="text" id="category-en" placeholder="Alternative School">
+                        <input
+                            type="text"
+                            id="category-en"
+                            placeholder="Alternative School"
+                        >
 
                     </div>
 
 
                     <!-- ====================================
-             Category Name Japanese
-             ==================================== -->
+                         Category Name Japanese
+                         ==================================== -->
 
                     <div class="form-group category-jp-group">
 
@@ -132,11 +150,19 @@
                             Category Name (Japanese)
                         </label>
 
-                        <input type="text" id="category-jp" placeholder="オルタナティブスクール">
+                        <input
+                            type="text"
+                            id="category-jp"
+                            placeholder="オルタナティブスクール"
+                        >
 
                         <div class="category-check-actions">
 
-                            <button type="button" class="small-action-btn" id="check-category-btn">
+                            <button
+                                type="button"
+                                class="small-action-btn"
+                                id="check-category-btn"
+                            >
                                 Check
                             </button>
 
@@ -149,10 +175,14 @@
 
 
                 <!-- ====================================
-         Category Check Status
-         ==================================== -->
+                     Category Check Status
+                     ==================================== -->
 
-                <div id="category-check-status" class="category-check-status" hidden></div>
+                <div
+                    id="category-check-status"
+                    class="category-check-status"
+                    hidden
+                ></div>
 
             </section>
 
@@ -183,8 +213,11 @@
                             Keywords (English)
                         </label>
 
-                        <textarea id="keywords-en" rows="5"
-                            placeholder="alternative school&#10;education&#10;kids&#10;learning"></textarea>
+                        <textarea
+                            id="keywords-en"
+                            rows="5"
+                            placeholder="alternative school&#10;education&#10;kids&#10;learning"
+                        ></textarea>
 
                     </div>
 
@@ -194,7 +227,11 @@
                             Keywords (Japanese)
                         </label>
 
-                        <textarea id="keywords-jp" rows="5" placeholder="オルタナティブスクール&#10;教育&#10;子ども&#10;学び"></textarea>
+                        <textarea
+                            id="keywords-jp"
+                            rows="5"
+                            placeholder="オルタナティブスクール&#10;教育&#10;子ども&#10;学び"
+                        ></textarea>
 
                     </div>
 
@@ -229,7 +266,11 @@
                             Description (English)
                         </label>
 
-                        <textarea id="description-en" rows="6" placeholder="Describe this category..."></textarea>
+                        <textarea
+                            id="description-en"
+                            rows="6"
+                            placeholder="Describe this category..."
+                        ></textarea>
 
                     </div>
 
@@ -239,7 +280,11 @@
                             Description (Japanese)
                         </label>
 
-                        <textarea id="description-jp" rows="6" placeholder="このカテゴリーについて説明してください..."></textarea>
+                        <textarea
+                            id="description-jp"
+                            rows="6"
+                            placeholder="このカテゴリーについて説明してください..."
+                        ></textarea>
 
                     </div>
 
@@ -268,13 +313,43 @@
 
                     </div>
 
-                    <button type="button" class="small-action-btn" id="add-key-information-btn">
-                        + Add Field
-                    </button>
+
+                    <!-- ====================================
+                         Key Information Actions
+                         ==================================== -->
+
+                    <div class="section-heading-actions">
+
+                        <button
+                            type="button"
+                            class="small-action-btn"
+                            id="import-excel-btn"
+                        >
+                            Import Excel
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="small-action-btn"
+                            id="add-key-information-btn"
+                        >
+                            + Add Field
+                        </button>
+
+                    </div>
 
                 </div>
 
-                <div class="key-information-list" id="key-information-list"></div>
+
+                <!-- ====================================
+                     Key Information List
+                     ==================================== -->
+
+                <div
+                    class="key-information-list"
+                    id="key-information-list"
+                ></div>
 
             </section>
 
@@ -294,18 +369,27 @@
                         </h2>
 
                         <p>
-                             Add images, PDFs, documents, spreadsheets, notes, and other files.
+                            Add images, PDFs, documents, spreadsheets, notes, and other files.
                         </p>
 
                     </div>
 
-                    <button type="button" class="small-action-btn" id="add-media-btn">
+
+                    <button
+                        type="button"
+                        class="small-action-btn"
+                        id="add-media-btn"
+                    >
                         + Add Media
                     </button>
 
                 </div>
 
-                <div class="media-list" id="media-list"></div>
+
+                <div
+                    class="media-list"
+                    id="media-list"
+                ></div>
 
             </section>
 
@@ -333,14 +417,21 @@
 
                 </div>
 
-                <button type="button" class="action-btn" id="preview-btn">
+                <button
+                    type="button"
+                    class="action-btn"
+                    id="preview-btn"
+                >
                     Preview
                 </button>
 
             </div>
 
 
-            <div class="category-preview" id="category-preview">
+            <div
+                class="category-preview"
+                id="category-preview"
+            >
 
                 <div class="empty-preview">
 
